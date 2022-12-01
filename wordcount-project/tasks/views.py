@@ -1,7 +1,22 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import View
 
 from .models import *
 from .forms import *
+
+class CustomLoginView(LoginView):
+   template_name = 'base/login.html'
+   fields = '__all__'
+   redirect_authenticated_user = True
+   
+   def get_success_url(self):
+      return reverse_lazy('tasks')
 
 def task(request):
    tasks = Task.objects.all()
