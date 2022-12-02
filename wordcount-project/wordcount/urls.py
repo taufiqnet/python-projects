@@ -18,9 +18,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('count/', views.count, name='count'),
     
-    #Function Based Application
-    path('tasks/', include('tasks.urls'), name='tasks'),
-    
     #Class Based Applicaiton
     path('taskList', include('base.urls')),
     
