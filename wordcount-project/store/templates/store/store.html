@@ -1,0 +1,28 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %} 
+
+    <h3>Store</h3>
+
+    <div class="row">
+        {% for product in products  %}
+        <div class="col-lg-4">
+            <div class="card">
+            <!--
+            <img src="{% static 'bootstrap/images/placeholder.png' %}" class="card-img-top" alt="Default Placeholder Image"> -->
+            <img src="{{product.imageURL|default:'/images/placeholder.png'}}" class="card-img-top">
+          
+            <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <p class="card-text">{{product.description|slice:":100"}}...</p>
+                <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+
+                <a href="#" class="btn btn-info">View</a>
+                <h4 style="display: inline-block; float: right">${{product.price|floatformat:2}}</h4>
+              </div>
+          </div>          
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}

@@ -18,8 +18,11 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('count/', views.count, name='count'),
     
+    
+    
     #Class Based Applicaiton
     path('taskList', include('base.urls')),
+    path('store/', include('store.urls')),
     
     
     

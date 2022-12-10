@@ -1,0 +1,58 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %} 
+
+<h3>Checkout</h3>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Customer Information
+            </div>
+            <div class="card-body">
+                
+            </div>
+            <div class="card-footer">
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Order Summary
+            </div> 
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Turtle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td><img src="{{item.product.imageURL}}" class="card-img-top" alt="Default Placeholder Image" height="150" width="50"></td>
+                            <td>{{item.product.name}}</td>
+                            <td>${{item.product.price}}</td>
+                            <td>x{{item.quantity}}</td>
+                        </tr>
+                        {% endfor %}             
+                       
+                    </tbody>
+                </table>
+                <h4>Items: {{order.get_cart_items}}</h4>
+                <h4>Total: ${{order.get_cart_total|floatformat:2}}</h4>
+            </div>
+            <div class="card-footer">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %} 

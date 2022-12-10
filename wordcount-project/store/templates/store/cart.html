@@ -1,0 +1,69 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %} 
+
+<h3>Cart Page</h3>
+<div class="row">
+    <div class="card">
+        <div class="card-header">
+            
+        </div>
+        <div class="card-body">
+            <h4>Items: {{order.get_cart_items}}</h4>
+            <h4>Total: ${{order.get_cart_total|floatformat:2}}</h4>
+            <a href="#" class="btn btn-success">Checkout</a>
+        </div>
+        <div class="card-footer">
+            
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="card">
+        <div class="card-header">
+            <a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-grey table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for item in items %}
+                    <tr>
+                        <td><img src="{{item.product.imageURL|default:'/images/placeholder.png'}}" class="card-img-top" alt="Default Placeholder Image" height="150" width="50"></td>
+                        <td>{{item.product.name}}</td>
+                        <td>{{item.product.price|floatformat:2}}</td>
+                        <td>{{item.quantity}}
+                            <div style="flex:1">
+                                
+                                <div class="quantity">
+                                    <img data-product={{item.product.id}} data-action="add" class="chg-quantity update-cart" src="{% static  'bootstrap/images/arrow-up.png' %}">
+                            
+                                    <img data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart" src="{% static  'bootstrap/images/arrow-down.png' %}">
+                                </div>
+                            </div>
+                        </td>
+                        <td>${{item.get_total}}</td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card-footer">
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %} 

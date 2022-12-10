@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce Site</title>
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-grid.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-utilities.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-utilities.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/custom.css' %}">
+   
+    <script>
+      var user = '{{request.user}}'
+
+      function getToken(name){
+        var cookieValue = null;
+        if(document.cookie && document.cookie !== ''){
+          var cookies = document.cookie.split(';');
+          for (var i=0; i<cookies.length; i++){
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if(cookie.substring(0, name.length + 1) === (name + '=')){
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      var csrftoken = getToken('csrftoken');
+    </script>
+</head>
+<body>
+   
+        
+
+        <header class="p-3 text-bg-dark">
+           <div class="container">
+              <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                  Home
+                </a>
+        
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                  
+                  <li><a href="{% url 'store' %}" class="nav-link px-2 text-white">Store</a></li>
+                  <li><a href="{% url 'cart' %}" class="nav-link px-2 text-white">Cart</a></li>
+                  <li><a href="{% url 'checkout' %}" class="nav-link px-2 text-white">Checkout</a></li>
+                </ul>
+        
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                  <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                </form>
+                <a href="{% url 'cart' %}">
+                  <img src="{% static 'bootstrap/images/cart-3.png' %}" id="cart-icon" alt="cart-icon">
+                </a>
+                <p id="cart-total">{{cartItems}}</p>
+        <!--
+                <div class="dropdown text-end">
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                  </a>
+                  
+                  <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  </ul>
+                </div>
+              -->
+              </div>
+            </div>
+          </header>
+        <div class="container">
+        {% block content %} {% endblock content %}
+        </div>
+    
+        <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>  
+
+        <script src="{% static 'bootstrap/js/cart.js' %}"></script>
+</body>
+</html>
